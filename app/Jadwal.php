@@ -17,6 +17,21 @@ class Jadwal extends Model
 
     public function absensi()
     {
-        return $this->hasMany('App/Absensi', 'jadwal_id');
+        return $this->hasMany('App\Absensi', 'jadwal_id');
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo('App\Kelas');
+    }
+    
+    public function matkul()
+    {
+        return $this->belongsTo('App\Matkul');
+    }
+
+    public function instruktur()
+    {
+        return $this->belongsTo('App\Instruktur');
     }
 }

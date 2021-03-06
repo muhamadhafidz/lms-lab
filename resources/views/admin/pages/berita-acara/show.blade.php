@@ -9,10 +9,10 @@
                     <div class="card-header ">
                         <div class="row mb-3">
                             <div class="col">
-                                <h4 class="card-title font-weight-normal">Berita Acara Praktikum PTI</h4>
+                                <h4 class="card-title font-weight-normal">Berita Acara Praktikum </h4>
                             </div>
                             <div class="col text-right">
-                                <a href="" class="btn btn-primary btn-sm">+ Tambah Berita Acara</a>
+                                <a href="{{ route('admin.berita-acara.create', $id) }}" class="btn btn-primary btn-sm">+ Tambah Berita Acara</a>
                             </div>
                         </div>
                         <div class="detail-bap px-4 py-3">
@@ -50,14 +50,18 @@
                                 <th>Absensi</th>
                                 <th>Laporan Akhir</th>
                                 <th>Laporan Awal</th>
-                                <th>Aksi</th>
+                                <th>Ubah</th>
+                                <th>Hapus</th>
                             </thead>
                             <tbody>
+                                @foreach ($data as $item)
                                 <tr>
-                                    <td>P1</td>
-                                    <td>12 Januari 2021</td>
+                                    <td>{{ $item->pertemuan }}</td>
+                                    <td>{{ $item->created_at->isoFormat('D MMMM Y') }}</td>
                                     <td>
-                                        <a href="" class="btn btn-primary btn-sm">Lihat</a>
+                                        <span class="mr-3">Alfa  : {{ $item->alfa }}</span>
+                                        <span class="mr-3">Izin  : {{ $item->izin }}</span>
+                                        <span class="mr-3">Sakit : {{ $item->sakit }}</span>
                                     </td>
                                     <td>
                                         <a href="" class="btn btn-primary btn-sm">Lihat</a>
@@ -66,11 +70,15 @@
                                         <a href="" class="btn btn-primary btn-sm">Lihat</a>
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-primary">Ubah</a>
-                                        <a href="" class="btn btn-danger ml-3">Hapus</a>
+                                        <a href="{{ route('admin.berita-acara.edit', [$id, $item->id]) }}" class="btn btn-warning btn-sm">Ubah</a>
+                                    </td>
+                                    <td>
+                                        <a href="" class="btn btn-danger btn-sm">Hapus</a>
                                     </td>
                                 </tr>
-                                <tr>
+                                @endforeach
+                                
+                                {{-- <tr>
                                     <td>P2</td>
                                     <td>20 Januari 2021</td>
                                     <td>
@@ -86,7 +94,7 @@
                                         <a href="" class="btn btn-primary">Ubah</a>
                                         <a href="" class="btn btn-danger ml-3">Hapus</a>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             </tbody>
                         </table>
                     </div>

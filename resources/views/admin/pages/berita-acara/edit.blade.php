@@ -14,28 +14,27 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form method="POST" action="{{ route('admin.berita-acara.update', [$id, $bapid]) }}">
+                            @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label for="pertemuan">Pertemuan</label>
-                                <input type="text" class="form-control" id="pertemuan">
+                                <input type="text" class="form-control" id="pertemuan" name="pertemuan" value="{{ $item->pertemuan }}">
                             </div>
+                            <hr>
                             <h5>Absensi</h5>
                             <div class="row">
                                 <div class="col">
                                     <label for="alfa">Alfa</label>
-                                    <input type="number" class="form-control" id="alfa">
+                                    <input type="number" class="form-control" name="alfa" value="{{ $item->alfa }}">
                                 </div>
                                 <div class="col">
                                     <label for="izin">Izin</label>
-                                    <input type="number" class="form-control" id="izin">
+                                    <input type="number" class="form-control" name="izin" value="{{ $item->izin }}">
                                 </div>
                                 <div class="col">
                                     <label for="sakit">Sakit</label>
-                                    <input type="number" class="form-control" id="sakit">
-                                </div>
-                                <div class="col">
-                                    <label for="total-praktikan">Jumlah Praktikan</label>
-                                    <input type="number" class="form-control" id="total-praktikan">
+                                    <input type="number" class="form-control" name="sakit" value="{{ $item->sakit }}">
                                 </div>
                             </div>
                             <hr>
@@ -44,18 +43,18 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="lap-akhir">Laporan Akhir</label>
-                                        <textarea class="form-control" id="lap-akhir" rows="5"></textarea>
+                                        <textarea class="form-control" name="lap_akhir" rows="5">{{ $item->lap_awal }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="lap-awal">Laporan Awal ( Pertemuan Selanjutnya )</label>
-                                        <textarea class="form-control" id="lap-awal" rows="5"></textarea>
+                                        <textarea class="form-control" name="lap_awal" rows="5">{{ $item->lap_akhir }}</textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="btn-bap">
-                                <a href="" class="btn btn-success d-block">Submit</a>
+                                <button type="submit" class="btn btn-success d-block">Submit</button>
                             </div>
                         </form>
                     </div>

@@ -17,6 +17,6 @@ class Matkul extends Model
 
     public function jadwal()
     {
-        return $this->hasMany('App/Jadwal', 'matkul_id');
+        return $this->hasMany('App\Jadwal', 'matkul_id');
     }
 }

@@ -20,12 +20,21 @@ Auth::routes();
 
 
 
-Route::get('/login', 'LoginController@index')->name('login');
-Route::get('/admin/profil', 'AdminProfilController@index')->name('admin.profil');
+// Route::get('/login', 'LoginController@index')->name('login');
+Route::get('/admin/profil', 'AdminProfilController@index')->name('admin.profil.index');
+
+
 Route::get('/admin/praktikum', 'AdminPraktikumController@index')->name('admin.praktikum');
-Route::get('/admin/absen', 'AdminAbsenController@index')->name('admin.absen');
-Route::get('/admin/absen/{id}/create', 'AdminAbsenController@create')->name('admin.absen-create');
-Route::get('/admin/berita-acara', 'AdminBeritaAcaraController@index')->name('admin.berita-acara');
-Route::get('/admin/bap/create', 'AdminBeritaAcaraController@create')->name('admin.bap-create');
+
+Route::get('/admin/absensi', 'AdminAbsenController@index')->name('admin.absensi.index');
+Route::post('/admin/absensi/absen', 'AdminAbsenController@absen')->name('admin.absensi.absen');
+
+Route::get('/admin/berita-acara', 'AdminBeritaAcaraController@index')->name('admin.berita-acara.index');
+Route::get('/admin/berita-acara/{id}', 'AdminBeritaAcaraController@show')->name('admin.berita-acara.show');
+Route::get('/admin/berita-acara/{id}/create', 'AdminBeritaAcaraController@create')->name('admin.berita-acara.create');
+Route::post('/admin/berita-acara/{id}/store', 'AdminBeritaAcaraController@store')->name('admin.berita-acara.store');
+Route::get('/admin/berita-acara/{id}/{bapid}', 'AdminBeritaAcaraController@edit')->name('admin.berita-acara.edit');
+Route::put('/admin/berita-acara/{id}/update/{bapid}', 'AdminBeritaAcaraController@update')->name('admin.berita-acara.update');
 
 
+Route::resource('/user', 'AdminUserController');

@@ -17,6 +17,6 @@ class Kelas extends Model
 
     public function user()
     {
-        return $this->hasMany('App/User', 'kelas_id');
+        return $this->hasMany('App\User', 'kelas_id');
     }
 }

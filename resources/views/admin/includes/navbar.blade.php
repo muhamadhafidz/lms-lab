@@ -55,9 +55,11 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#pablo">
-                        <span class="no-icon">Log out</span>
-                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="">
+                        @csrf
+                        {{-- <button>test</button> --}}
+                        <button class="nav-link btn btn-link btn-lg" type="submit">Log out</button>
+                    </form>
                 </li>
             </ul>
         </div>

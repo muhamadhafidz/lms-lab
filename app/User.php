@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nama', 'npm', 'kelas_id', 'no_telp', 'email', 'kata_sandi', 'roles', 'active'
+        'nama', 'npm', 'kelas_id', 'no_telp', 'email', 'password', 'roles', 'active'
     ];
 
     /**
@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'kata_sandi'
+        'password'
     ];
 
     /**
@@ -36,17 +36,17 @@ class User extends Authenticatable
     
     public function asisten()
     {
-        return $this->hasMany('App/Asisten', 'user_id');
+        return $this->hasMany('App\Asisten', 'user_id');
     }
 
     public function instruktur()
     {
-        return $this->hasMany('App/Instruktur', 'user_id');
+        return $this->hasMany('App\Instruktur', 'user_id');
     }
 
     public function absensi()
     {
-        return $this->hasMany('App/Absensi', 'user_id');
+        return $this->hasMany('App\Absensi', 'user_id');
     }
 
     public function kelas()

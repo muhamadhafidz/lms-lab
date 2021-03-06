@@ -17,6 +17,16 @@ class Instruktur extends Model
 
     public function asisten()
     {
-        return $this->hasMany('App/Asisten', 'instruktur_id');
+        return $this->hasMany('App\Asisten', 'instruktur_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function jadwal()
+    {
+        return $this->hasMany('App\Jadwal', 'instruktur_id');
     }
 }

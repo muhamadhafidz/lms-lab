@@ -15,5 +15,8 @@ class Asisten extends Model
 
     protected $table = 'asisten';
 
-    
+    public function instruktur()
+    {
+        return $this->belongsTo('App\Instruktur');
+    }
 }
