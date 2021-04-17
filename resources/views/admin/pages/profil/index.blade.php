@@ -14,18 +14,18 @@
                                         <img src="{{ asset('assets/admin/img/hafidz1.jpg') }}" class="img-fluid rounded-circle mb-2" alt="">
                                         <a href="">Ganti foto</a>
                                     </div>
-                                    <h3 class="font-weight-bold">{{ $data->nama }}</h3>
+                                    <h3 class="font-weight-bold">{{ Auth::user()->nama }}</h3>
                                     <p class="">{{ ucwords($data->roles) }} Lab</p>
                                 </div>
                                 <div class="col-6">
                                     <h5 class="font-weight-bold mb-1">Nomor Mahasiswa</h5>
-                                    <h5>{{ $data->npm }}</h5>
+                                    <h5>{{ Auth::user()->npm }}</h5>
                                     <h5 class="font-weight-bold mb-1">Jurusan</h5>
-                                    <h5>{{ $data->kelas->jurusan }}</h5>
+                                    <h5>{{ Auth::user()->kelas->jurusan }}</h5>
                                     <h5 class="font-weight-bold mb-1">Email</h5>
-                                    <h5>{{ $data->email }}</h5>
+                                    <h5>{{ Auth::user()->email }}</h5>
                                     <h5 class="font-weight-bold mb-1">Nomor Telepon</h5>
-                                    <h5>{{ $data->no_telp }}</h5>
+                                    <h5>{{ Auth::user()->no_telp }}</h5>
 
                                     <div class="btn-profil mt-5">
                                         <a href="" class="btn btn-primary">Ubah profil</a>

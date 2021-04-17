@@ -19,4 +19,9 @@ class Asisten extends Model
     {
         return $this->belongsTo('App\Instruktur');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

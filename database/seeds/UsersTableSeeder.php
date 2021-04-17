@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             'email' => Str::random(8).'@gmail.com',
             'no_telp' => Str::random(8),
             'password' => Hash::make('password'),
-            'no_telp' => 'asisten',
+            'roles' => 'asisten',
             'active' => 'y',
         ]);
     }

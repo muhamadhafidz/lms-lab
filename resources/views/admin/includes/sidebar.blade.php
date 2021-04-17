@@ -6,30 +6,30 @@ Tip 2: you can also add an image using data-image tag
 -->
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text">
-                {{-- {{ $data->roles }} --}}
-            </a>
+            <div class="simple-text">
+                {{ Auth::user()->roles }}
+            </div>
         </div>
         <ul class="nav">
             <li class="nav-item active">
-                <a class="nav-link" href="dashboard.html">
+                <a class="nav-link" href="{{ route('admin.profil.index') }}">
                     <i class="nc-icon nc-circle-09"></i>
                     <p>Profil</p>
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="./user.html">
-                    <i class="nc-icon nc-circle-09"></i>
-                    <p>User Profile</p>
+                <a class="nav-link" href="{{ route('admin.berita-acara.index') }}">
+                    <i class="nc-icon nc-paper-2"></i>
+                    <p>Berita Acara</p>
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="./table.html">
+                <a class="nav-link" href="{{ route('admin.absensi.index') }}">
                     <i class="nc-icon nc-notes"></i>
-                    <p>Table List</p>
+                    <p>Absen</p>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a class="nav-link" href="./typography.html">
                     <i class="nc-icon nc-paper-2"></i>
                     <p>Typography</p>
@@ -57,7 +57,7 @@ Tip 2: you can also add an image using data-image tag
                 <a class="nav-link active" href="upgrade.html">
                     <img class="img-fluid" src="{{ asset('assets/image/logo.png') }}" alt="">
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </div>

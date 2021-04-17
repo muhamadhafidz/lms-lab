@@ -1,6 +1,7 @@
 @extends('admin.layouts.default')
 
 @section('content')
+{{-- {{  }} --}}
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -17,35 +18,58 @@
                         <table class="table table-striped">
                             <thead>
                                 <th>Pertemuan</th>
+                                <th>Praktikum</th>
                                 <th>Hari</th>
                                 <th>Shift</th>
                                 <th>Tanggal</th>
-                                <th>Keterangan</th>
                                 <th>Absen</th>
+                                <th>Keterangan</th>
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
                                 <tr>
                                     <td>{{ $item->pertemuan }}</td>
-                                    <td>{{ $item->jadwal->hari }}</td>
+                                    <td>{{ $item->jadwal->matkul->nama_matkul }}</td>
+                                    <td>{{ ucwords($item->jadwal->hari) }}</td>
                                     <td>{{ $item->jadwal->shift }}</td>
                                     <td>{{ $item->created_at->isoFormat('D MMMM Y') }}</td>
-                                    <td>{{ $item->jadwal->matkul->nama_matkul }}</td>
                                     <td> 
-                                        @if ($absensi->where('user_id', 1)->where('bap_id', $item->id)->first())
+                                        @if ($absensi->where('user_id', Auth::user()->id)->where('bap_id', $item->id)->first())
                                             <button type="button" class="btn btn-secondary mr-2" disabled>Hadir</button>
-                                            <button type="button" class="btn btn-secondary " disabled>
-                                                Izin
-                                            </button>
+                                            @if ($item->jadwal->instruktur->user_id == Auth::user()->id)
+                                                <button type="button" class="btn btn-secondary " disabled>
+                                                    Izin
+                                                </button>
+                                            @endif
                                         @else
-                                            <form method="POST" action="{{ route('admin.absensi.absen') }}">
+                                            <form method="POST" action="{{ route('admin.absensi.absen', [Auth::user()->id, $item->id] ) }}">
                                                 @csrf
-                                                <button type="submit" class="btn btn-success mr-2">Hadir</button>
+                                                <button type="submit" class="btn btn-success mr-2 ">Hadir</button>
                                             </form>
-
-                                            <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#exampleModal">
-                                                Izin
-                                            </button>
+                                            @if ($item->jadwal->instruktur->user_id == Auth::user()->id)
+                                                {{-- <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#exampleModal">
+                                                    Izin
+                                                </button> --}}
+                                                <a href="#mymodal" data-remote="{{ route('admin.absensi.show', [Auth::user()->id, $item->id] ) }}" class="btn btn-warning" data-toggle="modal" data-target="#mymodal" data-title="Detail " >
+                                                    Izin
+                                                </a>
+                                            @endif
+                                        @endif
+                                        
+                                    </td>
+                                    <td>
+                                        @php
+                                            $bsn = $absensi->where('user_id', Auth::user()->id)->where('bap_id', $item->id)->first();
+                                            
+                                        @endphp
+                                        @if ($bsn != null)
+                                            @if ($bsn->status == 'izin')
+                                                Izin / Tidak Hadir
+                                            @else
+                                                {{ ucwords($bsn->status) }}
+                                            @endif
+                                        @else
+                                            {{ "Belum Absen" }}
                                         @endif
                                         
                                     </td>
@@ -65,7 +89,7 @@
 
   
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="mymodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -74,23 +98,23 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="" method="POST">
             <div class="modal-body">
-                <div class="form-group">
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                </div>
+                
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Simpan</button>
-            </div>
-        </form>
       </div>
     </div>
   </div>
 @endsection
+
+@push('after-script')
+<script>
+    jQuery(document).ready(function($){
+        $('#mymodal').on('show.bs.modal', function(e) {
+            var button = $(e.relatedTarget);
+            var modal = $(this);
+            modal.find('.modal-body').load(button.data("remote"));
+            modal.find('.modal-title').html(button.data("title"));
+        }); 
+    });
+</script>
+@endpush

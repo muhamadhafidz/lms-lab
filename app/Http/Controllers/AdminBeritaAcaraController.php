@@ -55,6 +55,12 @@ class AdminBeritaAcaraController extends Controller
             'lap_akhir' => '',
         ]);
         $items['jadwal_id'] = $id;
+        if ( $items['lap_awal'] == null){
+            $items['lap_awal'] = '-';
+        }
+        if ( $items['lap_akhir'] == null){
+            $items['lap_akhir'] = '-';
+        }
         Bap::create($items);
 
         return redirect()->route('admin.berita-acara.show', $id);
@@ -84,6 +90,12 @@ class AdminBeritaAcaraController extends Controller
         $items['jadwal_id'] = $id;
         Bap::findOrFail($bapid)->update($items);
 
+        return redirect()->route('admin.berita-acara.show', $id);
+    }
+
+    public function delete(Request $request, $id, $bapid)
+    {
+        Bap::findOrFail($bapid)->delete();
         return redirect()->route('admin.berita-acara.show', $id);
     }
 }

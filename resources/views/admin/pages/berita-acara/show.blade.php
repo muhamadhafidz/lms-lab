@@ -73,7 +73,11 @@
                                         <a href="{{ route('admin.berita-acara.edit', [$id, $item->id]) }}" class="btn btn-warning btn-sm">Ubah</a>
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                        <form action="{{ route('admin.berita-acara.delete', [$id, $item->id]) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
