@@ -14,9 +14,4 @@ class Kelas extends Model
     ];
 
     protected $table = 'kelas';
-
-    public function user()
-    {
-        return $this->hasMany('App\User', 'kelas_id');
-    }
 }

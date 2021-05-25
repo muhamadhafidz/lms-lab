@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Instruktur extends Model
 {
     protected $fillable = [
-        'user_id'
+        'user_id', 'jadwal_id'
     ];
 
     protected $hidden = [
@@ -27,6 +27,6 @@ class Instruktur extends Model
 
     public function jadwal()
     {
-        return $this->hasMany('App\Jadwal', 'instruktur_id');
+        return $this->belongsTo('App\Jadwal');
     }
 }

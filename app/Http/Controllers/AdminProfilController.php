@@ -9,9 +9,7 @@ class AdminProfilController extends Controller
 {
     public function index()
     {
-        $data = User::with('kelas')->first();
-        return view('admin.pages.profil.index', [
-            'data' => $data
-        ]);
+        // $data = User::with('kelas')->first();
+        return view('admin.pages.profil.index');
     }
 }

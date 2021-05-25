@@ -34,7 +34,7 @@
                                         <a href="{{ route('admin.matkul.download', $item->id) }}" class="btn btn-success btn-sm">Unduh SAP</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.matkul.edit', $item->id) }}" class="btn btn-warning btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.matkul.edit', $item->id) }}" class="btn btn-warning btn-sm mr-2">Ubah</a>
 
                                         <form action="{{ route('admin.matkul.delete', $item->id) }}" method="post">
                                             @csrf

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Jadwal extends Model
 {
     protected $fillable = [
-        'matkul_id', 'kelas_id', 'instruktur_id', 'hari', 'shift'
+        'matkul_id', 'kelas_id', 'hari', 'shift'
     ];
 
     protected $hidden = [
@@ -32,6 +32,11 @@ class Jadwal extends Model
 
     public function instruktur()
     {
-        return $this->belongsTo('App\Instruktur');
+        return $this->hasMany('App\Instruktur', 'jadwal_id');
+    }
+
+    public function asisten()
+    {
+        return $this->hasMany('App\Asisten', 'jadwal_id');
     }
 }

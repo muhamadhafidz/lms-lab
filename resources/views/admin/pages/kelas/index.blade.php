@@ -25,7 +25,6 @@
                                 <th>Jurusan</th>
                                 <th>Mahasiswa</th>
                                 <th>Aksi</th>
-                                <th>Lihat Kelas</th>
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
@@ -36,14 +35,11 @@
                                     <td>{{ $item->jumlah_mhs }}</td>
                                     <td>
                                         <a href="{{ route('admin.kelas.edit', $item->id) }}" class="btn btn-warning btn-sm">Ubah</a>
-                                        <form action="{{ route('admin.kelas.delete', $item->id) }}" method="post">
+                                        <form action="{{ route('admin.kelas.delete', $item->id) }}" method="post" class="ml-1 d-inline">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                         </form>
-                                    </td>
-                                    <td>
-                                        <a href="" class="btn btn-primary btn-sm">Detail</a>
                                     </td>
                                 </tr>
                                 @endforeach

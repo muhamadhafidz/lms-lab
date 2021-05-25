@@ -801,7 +801,7 @@ body>.navbar-collapse[data-color="purple"]:after {
     right: -15px;
 }
 
-.modal.show .modal-dialog {
+/* .modal.show .modal-dialog {
     -webkit-transform: translate(0, 30%);
     -o-transform: translate(0, 30%);
     transform: translate(0, 30%);
@@ -865,7 +865,7 @@ body>.navbar-collapse[data-color="purple"]:after {
 .modal .modal-content .modal-footer .btn:hover,
 .modal .modal-content .modal-footer .btnfocus {
     text-decoration: none;
-}
+} */
 
 /* .btn {
     border-width: 2px;
@@ -1659,7 +1659,7 @@ fieldset[disabled] .form-control {
     border-color: #9A9A9A;
 }
 
-.alert {
+/* .alert {
     border: 0;
     border-radius: 0;
     color: #FFFFFF;
@@ -1754,7 +1754,7 @@ fieldset[disabled] .form-control {
 
 .alert-danger {
     background-color: #fc727a;
-}
+} */
 
 .table .radio,
 .table .checkbox {

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Asisten extends Model
 {
     protected $fillable = [
-        'user_id', 'instruktur_id'
+        'user_id', 'jadwal_id'
     ];
 
     protected $hidden = [
@@ -15,9 +15,9 @@ class Asisten extends Model
 
     protected $table = 'asisten';
 
-    public function instruktur()
+    public function jadwal()
     {
-        return $this->belongsTo('App\Instruktur');
+        return $this->belongsTo('App\Jadwal');
     }
 
     public function user()

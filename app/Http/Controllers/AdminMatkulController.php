@@ -23,6 +23,7 @@ class AdminMatkulController extends Controller
 
     public function store(Request $request)
     {
+        // dd("tes");
         $item = $request->validate([
             'nama_matkul' => 'required',
             'file_sap' => 'required',

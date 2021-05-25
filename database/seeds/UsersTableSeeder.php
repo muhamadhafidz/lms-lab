@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'npm' => Str::random(8),
             'nama' => Str::random(10),
-            'kelas_id' => 1,
+            'dir_foto' => 'assets/img/users/hafidz1.jpg',
             'email' => Str::random(8).'@gmail.com',
             'no_telp' => Str::random(8),
             'password' => Hash::make('password'),

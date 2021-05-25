@@ -1,3 +1,6 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.5/js/plugins/piexif.min.js" type="text/javascript"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.5/js/plugins/sortable.min.js" type="text/javascript"></script>
 <!--   Core JS Files   -->
 <script src="{{ asset('assets/admin/js/core/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/admin/js/core/popper.min.js') }}" type="text/javascript"></script>

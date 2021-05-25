@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nama', 'npm', 'kelas_id', 'no_telp', 'email', 'password', 'roles', 'active'
+        'nama', 'npm', 'dir_foto', 'no_telp', 'email', 'password', 'roles', 'active'
     ];
 
     /**
@@ -49,8 +49,4 @@ class User extends Authenticatable
         return $this->hasMany('App\Absensi', 'user_id');
     }
 
-    public function kelas()
-    {
-        return $this->belongsTo('App\Kelas');
-    }
 }

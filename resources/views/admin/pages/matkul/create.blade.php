@@ -16,13 +16,14 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.matkul.store') }}" enctype="multipart/form-data">
                             @csrf
+                            
                             <div class="form-group">
                                 <label for="nama_matkul">Nama Mata Kuliah</label>
                                 <input type="text" class="form-control" id="nama_matkul" name="nama_matkul">
                             </div>
                             <div class="form-group">
                                 <label for="file_sap">File SAP</label>
-                                <input type="file" class="form-control" id="file_sap" name="file_sap">
+                                <input id="input-id" type="file" class="file" name="file_sap">
                             </div>
                             
                             <div class="btn-bap">
@@ -36,3 +37,9 @@
     </div>
 </div>
 @endsection
+
+@push('after-script')
+    <script>
+        
+    </script>
+@endpush
