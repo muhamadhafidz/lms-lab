@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped">
+                        <table class="table table-striped"  id="crudTable">
                             <thead>
                                 <th>No</th>
                                 <th>Mata Kuliah</th>
@@ -28,7 +28,7 @@
                             <tbody>
                                 @foreach ($data as $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ ucwords($item->nama_matkul) }}</td>
                                     <td>
                                         <a href="{{ route('admin.matkul.download', $item->id) }}" class="btn btn-success btn-sm">Unduh SAP</a>
@@ -36,10 +36,10 @@
                                     <td>
                                         <a href="{{ route('admin.matkul.edit', $item->id) }}" class="btn btn-warning btn-sm mr-2">Ubah</a>
 
-                                        <form action="{{ route('admin.matkul.delete', $item->id) }}" method="post">
+                                        <form action="{{ route('admin.matkul.delete', $item->id) }}" method="post" id="form-hapus-{{ $item->id }}">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                            <button type="button" onclick="hapus({{ $item->id }})" class="btn btn-danger btn-sm hapus">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -57,33 +57,30 @@
 <!-- Button trigger modal -->
 
   
-  <!-- Modal -->
-  <div class="modal fade" id="mymodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Pilih Instruktur Pengganti</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-            <div class="modal-body">
-                
-            </div>
-      </div>
-    </div>
-  </div>
+  
 @endsection
 
 @push('after-script')
 <script>
-    jQuery(document).ready(function($){
-        $('#mymodal').on('show.bs.modal', function(e) {
-            var button = $(e.relatedTarget);
-            var modal = $(this);
-            modal.find('.modal-body').load(button.data("remote"));
-            modal.find('.modal-title').html(button.data("title"));
-        }); 
+    $(document).ready(function(){
+        $('#crudTable').DataTable();
+        
+        
     });
+    function hapus(id){
+        Swal.fire({
+        title: 'Yakin menghapus matkul ini?',
+        text: "Kamu tidak akan bisa mengembalikan datanya!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yakin, hapus matkul ini!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            $('#form-hapus-'+id).submit();
+        }
+        });
+    }
 </script>
 @endpush

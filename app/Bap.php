@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bap extends Model
 {
     protected $fillable = [
-        'pertemuan', 'alfa', 'izin', 'sakit', 'lap_awal', 'lap_akhir', 'jadwal_id'
+        'pertemuan', 'alfa', 'izin', 'sakit', 'lap_awal', 'lap_akhir', 'jadwal_id', 'status'
     ];
 
     protected $hidden = [

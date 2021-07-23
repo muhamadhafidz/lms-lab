@@ -21,17 +21,17 @@
                             <tbody>
                                 @foreach ($data as $item)
                                 {{-- {{ dd( ) }} --}}
-                                @if ($item->instruktur->user_id == Auth::user()->id || $item->instruktur->asisten->where('user_id', Auth::user()->id)->count() > 0 )
+                                {{-- @if ($item->instruktur->first()->user_id == Auth::user()->id || $item->asisten->where('user_id', Auth::user()->id)->count() > 0 ) --}}
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->matkul->nama_matkul }}</td>
                                         <td>{{ $item->kelas->kelas }}</td>
-                                        <td>{{ $item->instruktur->user->nama }}</td>
+                                        <td>{{ $item->instruktur->first()->user->nama }}</td>
                                         <td>
                                             <a href="{{ route('admin.berita-acara.show', $item->id) }}" class="btn btn-primary">Pilih</a>
                                         </td>
                                     </tr>
-                                @endif
+                                {{-- @endif --}}
                                 
                                 @endforeach
                             </tbody>

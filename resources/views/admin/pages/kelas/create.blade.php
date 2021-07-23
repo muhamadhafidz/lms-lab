@@ -22,7 +22,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="jurusan">Jurusan</label>
-                                <input type="text" class="form-control" id="jurusan" name="jurusan">
+                                <select class="form-control" id="jurusan" name="jurusan">
+                                  <option value="pilih">Pilih Jurusan</option>
+                                  <option value="Sistem Informasi">Sistem Informasi</option>
+                                  <option value="Sistem Komputer">Sistem Komputer</option>
+                                  <option value="Teknik Komputer">Teknik Komputer</option>
+                                  <option value="Manajemen Informatika">Manajemen Informatika</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="jumlah_mhs">Jumlah Mhs</label>

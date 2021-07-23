@@ -9,7 +9,7 @@
                     <div class="card-header ">
                         <div class="row mb-3">
                             <div class="col">
-                                <h4 class="card-title font-weight-normal">Berita Acara Praktikum PTI</h4>
+                                <h4 class="card-title font-weight-normal">Tambah Berita Acara Praktikum {{ $jadwal->matkul->nama_matkul }}</h4>
                             </div>
                         </div>
                     </div>
@@ -25,15 +25,15 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="alfa">Alfa</label>
-                                    <input type="number" class="form-control" name="alfa">
+                                    <input type="number" class="form-control" name="alfa" required>
                                 </div>
                                 <div class="col">
                                     <label for="izin">Izin</label>
-                                    <input type="number" class="form-control" name="izin">
+                                    <input type="number" class="form-control" name="izin" required>
                                 </div>
                                 <div class="col">
                                     <label for="sakit">Sakit</label>
-                                    <input type="number" class="form-control" name="sakit">
+                                    <input type="number" class="form-control" name="sakit" required>
                                 </div>
                             </div>
                             <hr>
@@ -42,18 +42,18 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="lap-akhir">Laporan Akhir</label>
-                                        <textarea class="form-control" name="lap_akhir" rows="5"></textarea>
+                                        <textarea class="form-control" name="lap_akhir" rows="5" required></textarea>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="lap-awal">Laporan Awal ( Pertemuan Selanjutnya )</label>
-                                        <textarea class="form-control" name="lap_awal" rows="5"></textarea>
+                                        <textarea class="form-control" name="lap_awal" rows="5" required></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="btn-bap">
-                                <button type="submit" class="btn btn-success d-block">Submit</button>
+                                <button type="submit" class="btn btn-success w-100">Buat</button>
                             </div>
                         </form>
                     </div>

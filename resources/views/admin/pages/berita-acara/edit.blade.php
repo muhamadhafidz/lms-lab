@@ -9,7 +9,7 @@
                     <div class="card-header ">
                         <div class="row mb-3">
                             <div class="col">
-                                <h4 class="card-title font-weight-normal">Berita Acara Praktikum PTI</h4>
+                                <h4 class="card-title font-weight-normal">Ubah Berita Acara Praktikum {{ $item->jadwal->matkul->nama_matkul }}</h4>
                             </div>
                         </div>
                     </div>
@@ -43,18 +43,18 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="lap-akhir">Laporan Akhir</label>
-                                        <textarea class="form-control" name="lap_akhir" rows="5">{{ $item->lap_awal }}</textarea>
+                                        <textarea class="form-control" name="lap_akhir" rows="5">{{ $item->lap_akhir }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="lap-awal">Laporan Awal ( Pertemuan Selanjutnya )</label>
-                                        <textarea class="form-control" name="lap_awal" rows="5">{{ $item->lap_akhir }}</textarea>
+                                        <textarea class="form-control" name="lap_awal" rows="5">{{ $item->lap_awal }}</textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="btn-bap">
-                                <button type="submit" class="btn btn-success d-block">Submit</button>
+                                <button type="submit" class="btn btn-success w-100">Ubah</button>
                             </div>
                         </form>
                     </div>

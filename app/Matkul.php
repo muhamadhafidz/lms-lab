@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Matkul extends Model
 {
     protected $fillable = [
-        'nama_matkul', 'nama_file_sap'
+        'nama_matkul', 'nama_file_sap', 'slug'
     ];
 
     protected $hidden = [

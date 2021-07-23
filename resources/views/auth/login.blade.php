@@ -100,30 +100,34 @@
             <div class="card-body">
               <h5 class="card-title text-center">LOGIN</h5>
                 <form method="POST" action="{{ route('login') }}" class="form-login">
-                  @csrf
+                    @error('npm')
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Nomor mahasiswa atau kata sandi salah!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    @enderror
+                    @csrf
                 <div class="form-group">
                   <label for="npm">Nomor Mahasiswa</label>
-                  <input type="text" class="form-control @error('npm') is-invalid @enderror" id="npm" name="npm" value="{{ old('npm') }}" required autofocus>
-                  @error('npm')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                  @enderror
+                  <input type="number" class="form-control @error('npm') is-invalid @enderror" id="npm" name="npm" value="{{ old('npm') }}" required autofocus>
+                  
                 </div>
                 <div class="form-group">
                   <label for="password">Kata Sandi</label>
                   <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" required>
                 </div>
-                @error('password')
+                {{-- @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                @enderror
-                <div class="form-group form-check">
+                @enderror --}}
+                {{-- <div class="form-group form-check">
                   <input type="checkbox" class="form-check-input" id="exampleCheck1">
                   <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" class="btn btn-success d-block">Masuk</button>
+                </div> --}}
+                <button type="button" onclick="cekForm()" class="btn btn-success d-block">Masuk</button>
               </form>   
             </div>
           </div>
@@ -200,16 +204,44 @@
       </div>
   </div> --}}
     <!-- Optional JavaScript; choose one of the two! -->
-
+    
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
     -->
+    <script>
+        function cekForm(){
+            var npm = $('#npm').val();
+            var pw = $('#password').val();
+            if (npm == "" || pw == "") {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Masukan nomor mahasiswa dan kata sandi terlebih dahulu!',
+                    // text: 'Something went wrong!',
+                    // footer: '<a href="">Why do I have this issue?</a>'
+                });
+            }else {
+                $('.form-login').submit();
+            }
+        }
+        $(document).ready(function(){
+            $("#password").keypress(function(event){
+                if ( event.which == 13 ) {
+                    cekForm();
+                }
+            });
+            $("#npm").keypress(function(event){
+                if ( event.which == 13 ) {
+                    $("#password").focus();
+                }
+            });
+        });
+    </script>
   </body>
 </html>

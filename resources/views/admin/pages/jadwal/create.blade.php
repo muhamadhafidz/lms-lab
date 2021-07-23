@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <label for="kelas">Kelas</label>
                     <select class="form-control" id="kelas" name="kelas">
-                        <option>Pilih Kelas</option>
+                        <option value="pilih">Pilih Kelas</option>
                         @foreach ($kelas as $item_kls)
                         <option value="{{ $item_kls->id }}">{{ $item_kls->kelas }}</option>
                         @endforeach
@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <label for="matkul">Matkul</label>
                     <select class="form-control" id="matkul" name="matkul">
-                        <option>Pilih Matkul</option>
+                        <option value="pilih">Pilih Matkul</option>
                         @foreach ($matkul as $item_mtkl)
                         <option value="{{ $item_mtkl->id }}">{{ $item_mtkl->nama_matkul }}</option>
                         @endforeach
@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label for="hari">Hari</label>
                     <select class="form-control" id="hari" name="hari">
-                        <option>Pilih Hari</option>
+                        <option value="pilih">Pilih Hari</option>
                         @if ($senin != 'full')
                         <option value="senin">Senin</option>
                         @endif
@@ -50,13 +50,13 @@
                 <div class="form-group">
                     <label for="shift">Shift</label>
                     <select class="form-control" id="shift" name="shift">
-                        <option>Pilih Shift</option>
+                        <option value="pilih">Pilih Shift</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="instruktur">Instruktur</label>
                     <select class="form-control" id="instruktur" name="instruktur">
-                        <option>Pilih Instruktur</option>
+                        <option value="pilih">Pilih Instruktur</option>
                         @foreach ($users as $user)
                         <option value="{{ $user->id }}">{{ $user->nama }}</option>
                         @endforeach

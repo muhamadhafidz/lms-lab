@@ -23,7 +23,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="jurusan">Jurusan</label>
-                                <input type="text" class="form-control" id="jurusan" name="jurusan" value="{{ $data->jurusan }}">
+                                <select class="form-control" id="jurusan" name="jurusan">
+                                  <option value="Sistem Informasi" {{ $data->jurusan == "Sistem Informasi" ? "selected" : "" }}>Sistem Informasi</option>
+                                  <option value="Sistem Komputer" {{ $data->jurusan == "Sistem Komputer" ? "selected" : "" }}>Sistem Komputer</option>
+                                  <option value="Teknik Komputer" {{ $data->jurusan == "Teknik Komputer" ? "selected" : "" }}>Teknik Komputer</option>
+                                  <option value="Manajemen Informatika" {{ $data->jurusan == "Manajemen Informatika" ? "selected" : "" }}>Manajemen Informatika</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="jumlah_mhs">Jumlah Mhs</label>

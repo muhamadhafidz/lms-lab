@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
+use App\Jadwal;
 use App\Matkul;
 use File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AdminMatkulController extends Controller
 {
@@ -26,17 +29,18 @@ class AdminMatkulController extends Controller
         // dd("tes");
         $item = $request->validate([
             'nama_matkul' => 'required',
-            'file_sap' => 'required',
+            'file_sap' => 'required|mimes:doc,docx,pdf',
         ]);
         $file = $request->file('file_sap');
-        // dd($file);
+
+        $item['slug'] = Str::slug($item['nama_matkul'], '-');
         $file_name = str_replace(" ", "",$item['nama_matkul'])."-SAP".".".$file->getClientOriginalExtension();
         $file_location = "sap";
         $stored_file = $file->move($file_location, $file_name);
 
         $item['nama_file_sap'] = $stored_file->getPathname();
         Matkul::create($item);
-
+        Alert::success('Matkul berhasil ditambahkan', '');
         return redirect()->route('admin.matkul.index');
     }
 
@@ -52,7 +56,7 @@ class AdminMatkulController extends Controller
     {
         $item = $request->validate([
             'nama_matkul' => 'required',
-            'file_sap' => '',
+            'file_sap' => 'mimes:doc,docx,pdf',
         ]);
         $data = Matkul::findOrFail($id);
 
@@ -69,16 +73,23 @@ class AdminMatkulController extends Controller
         }
         
         $data->update($item);
-
+        Alert::success('Matkul berhasil diubah', '');
         return redirect()->route('admin.matkul.index');
     }
 
     public function delete(Request $request, $id)
     {
-        $item = Matkul::findOrFail($id);
-        File::delete($item->nama_file_sap);
-        $item->delete();
-
+        $jadwal = Jadwal::where('matkul_id', $id)->count();
+        // dd($jadwal);
+        if ($jadwal > 0) {
+            Alert::warning('Matkul gagal dihapus', 'Matkul telah terdaftar pada jadwal aktif');
+        }else{
+            $item = Matkul::findOrFail($id);
+            File::delete($item->nama_file_sap);
+            $item->delete();
+            Alert::success('Matkul berhasil dihapus', '');
+        }
+        
         return redirect()->route('admin.matkul.index');
     }
 

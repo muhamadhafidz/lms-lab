@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+Use Alert;
 use App\Asisten;
 use App\Instruktur;
 use App\Jadwal;
@@ -45,6 +46,7 @@ class AdminJadwalController extends Controller
         $kelas = Kelas::get();
         $matkul = Matkul::get();
         $users = User::get();
+
         return view('admin.pages.jadwal.index',[
             'data' => $data,
             'kelas' => $kelas,
@@ -73,7 +75,7 @@ class AdminJadwalController extends Controller
         {
             $id_matkul[] = $item->matkul_id;
         }
-        $matkul = Matkul::whereNotIn('id', $id_matkul)->get();
+        $matkul = Matkul::whereNotIn('id', $id_matkul)->orderBy('nama_matkul', 'asc')->get();
         foreach ($matkul as $mtkl) {
             $result .= '<option value="'.$mtkl->id.'">'.$mtkl->nama_matkul.'</option>';
         }
@@ -138,63 +140,63 @@ class AdminJadwalController extends Controller
         })->whereDoesntHave('instruktur', function ($query) use($id_instruktur){
             $query->where('user_id', $id_instruktur);
         })->get();
-        $result .= '<option>Pilih Asisten</option>';
+        $result .= '<option value="pilih">Pilih Asisten</option>';
         foreach ($user as $usr) {
             $result .= '<option value="'.$usr->id.'">'.$usr->nama.'</option>';
         }
-        // echo $asisten->count();
-        // $result = [];
-        // if (!$asisten->isEmpty()) {
-        //     foreach ($asisten as $getAsisten) { 
-        //         $result[] = $getAsisten->user->nama;
-        //     }
-        // }
-        // dump($result);
         echo $result;
     }
 
     public function storeAsisten(Request $request)
     {
         $item = $request->validate([
-            'asisten' => 'required',
+            'asisten' => 'required|not_in:pilih',
             'jadwal_id' => 'required',
         ]);
         $item['user_id'] = $item['asisten'];
-        // $item['matkul_id'] = $item['matkul'];
-        // $item['kelas_id'] = $item['kelas'];
-        // unset($item['matkul']);
-        // unset($item['kelas']);
         Asisten::create($item);
-        // $instruktur['user_id'] = $item['instruktur'];
-        // $instruktur['jadwal_id'] = $jadwal['id'];
-        // Instruktur::create($instruktur);
+        
         return redirect()->route('admin.jadwal.index');
     }
 
     public function store(Request $request)
     {
         $item = $request->validate([
-            'kelas' => 'required',
-            'matkul' => 'required',
-            'hari' => 'required',
-            'shift' => 'required',
-            'instruktur' => 'required',
+            'kelas' => 'required|not_in:pilih',
+            'matkul' => 'required|not_in:pilih',
+            'hari' => 'required|not_in:pilih',
+            'shift' => 'required|not_in:pilih',
+            'instruktur' => 'required|not_in:pilih',
         ]);
         // dd("wow");
         $item['matkul_id'] = $item['matkul'];
         $item['kelas_id'] = $item['kelas'];
         unset($item['matkul']);
         unset($item['kelas']);
+        
         $jadwal = Jadwal::create($item);
         $instruktur['user_id'] = $item['instruktur'];
         $instruktur['jadwal_id'] = $jadwal['id'];
         Instruktur::create($instruktur);
+        Alert::success('Jadwal berhasil dibuat', '');
         return redirect()->route('admin.jadwal.index');
     }
 
     public function delete(Request $request, $id)
     {
+        $asisten = Asisten::where('jadwal_id', $id);
+        $asisten->delete();
+        $instruktur = Instruktur::where('jadwal_id', $id);
+        $instruktur->delete();
         $item = Jadwal::findOrFail($id);
+        $item->delete();
+        Alert::success('Jadwal berhasil dihapus', '');
+        return redirect()->route('admin.jadwal.index');
+    }
+
+    public function deleteAsisten(Request $request, $id)
+    {
+        $item = Asisten::findOrFail($id);
         $item->delete();
 
         return redirect()->route('admin.jadwal.index');

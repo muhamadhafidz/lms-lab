@@ -1,18 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Dashboard</title>
     <!--     Fonts and icons     -->
-    @stack('before-font')
-    @include('admin.includes.style')
-    @stack('after-font')
+    
     <!-- CSS Files -->
     @stack('before-style')
     @include('admin.includes.style')
@@ -20,30 +13,58 @@
 
 </head>
 
-<body>
-    <div class="warpper">
-
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+    
+      <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="{{ asset('assets/admin/img/logo.png') }}" alt="AdminLTELogo" height="55" width="234">
+        </div>
+        @include('admin.includes.navbar')
         {{-- sidebar --}}
         @include('admin.includes.sidebar')
         {{-- end sidebar --}}
 
-        <div class="main-panel">
-            <!-- Navbar -->
-            @include('admin.includes.navbar')
-            <!-- End Navbar -->
-
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                {{-- <div class="container-fluid">
+                    <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Dashboard</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        </ol>
+                    </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid --> --}}
+            </div>
+            <!-- /.content-header -->
+            <section class="content">
             @yield('content')
-
-            @include('admin.includes.navbar')
+            </section>
+            <!-- End Navbar -->
         </div>
-    </div>
+
+            {{-- @include('admin.includes.footer') --}}
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
 
 </body>
 @stack('before-script')
 @include('admin.includes.script')
 @stack('after-script')
+@include('sweetalert::alert')
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-<script src="../assets/js/demo.js"></script>
+{{-- <script src="../assets/js/demo.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
@@ -52,6 +73,6 @@
         demo.showNotification();
 
     });
-</script>
+</script> --}}
 
 </html>

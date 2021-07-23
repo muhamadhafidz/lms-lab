@@ -28,18 +28,23 @@ Route::middleware(['auth','admin'])
         
         // PROFIL
         Route::get('/admin/profil', 'AdminProfilController@index')->name('admin.profil.index');
+        Route::get('/admin/profil/edit', 'AdminProfilController@edit')->name('admin.profil.edit');
+        Route::put('/admin/profil/update', 'AdminProfilController@update')->name('admin.profil.update');
+        Route::put('/admin/profil/update-foto', 'AdminProfilController@updateFoto')->name('admin.profil.update-foto');
+        Route::put('/admin/profil/update-password', 'AdminProfilController@updatePassword')->name('admin.profil.update-password');
 
         // ABSENSI
         Route::get('/admin/absensi', 'AdminAbsenController@index')->name('admin.absensi.index');
-        Route::post('/admin/absensi/izin/{bap}/{user}', 'AdminAbsenController@izin')->name('admin.absensi.izin');
+        Route::post('/admin/absensi/izin/{bap}', 'AdminAbsenController@izin')->name('admin.absensi.izin');
         Route::get('/admin/absensi/show/{user}/{bap}', 'AdminAbsenController@show')->name('admin.absensi.show');
-        Route::post('/admin/absensi/{id}/absen/{bap}', 'AdminAbsenController@absen')->name('admin.absensi.absen');
+        Route::post('/admin/absensi/absen/{bap}', 'AdminAbsenController@absen')->name('admin.absensi.absen');
 
         // BERITA ACARA
         Route::get('/admin/berita-acara', 'AdminBeritaAcaraController@index')->name('admin.berita-acara.index');
         Route::get('/admin/berita-acara/{id}', 'AdminBeritaAcaraController@show')->name('admin.berita-acara.show');
         Route::get('/admin/berita-acara/{id}/create', 'AdminBeritaAcaraController@create')->name('admin.berita-acara.create');
         Route::post('/admin/berita-acara/{id}/store', 'AdminBeritaAcaraController@store')->name('admin.berita-acara.store');
+        Route::put('/admin/berita-acara/{id}/selesai/{bapid}', 'AdminBeritaAcaraController@selesai')->name('admin.berita-acara.selesai');
         Route::get('/admin/berita-acara/{id}/{bapid}', 'AdminBeritaAcaraController@edit')->name('admin.berita-acara.edit');
         Route::put('/admin/berita-acara/{id}/update/{bapid}', 'AdminBeritaAcaraController@update')->name('admin.berita-acara.update');
         Route::delete('/admin/berita-acara/{id}/delete/{bapid}', 'AdminBeritaAcaraController@delete')->name('admin.berita-acara.delete');
@@ -72,15 +77,21 @@ Route::middleware(['auth','admin'])
                 Route::post('/admin/jadwal/getAsisten', 'AdminJadwalController@getAsisten')->name('admin.jadwal.getAsisten');
                 Route::post('/admin/jadwal/getShift', 'AdminJadwalController@getShift')->name('admin.jadwal.getShift');
                 Route::delete('/admin/jadwal/delete/{id}', 'AdminJadwalController@delete')->name('admin.jadwal.delete');
+                Route::delete('/admin/jadwal/deleteAsisten/{id}', 'AdminJadwalController@deleteAsisten')->name('admin.jadwal.deleteAsisten');
 
                 // ASISTEN
                 Route::get('/admin/asisten', 'AdminAsistenController@index')->name('admin.asisten.index');
                 Route::get('/admin/asisten/create', 'AdminAsistenController@create')->name('admin.asisten.create');
                 Route::get('/admin/asisten/{id}', 'AdminAsistenController@edit')->name('admin.asisten.edit');
                 Route::post('/admin/asisten/store', 'AdminAsistenController@store')->name('admin.asisten.store');
-                
+                Route::post('/admin/asisten/resetPassword/{id}', 'AdminAsistenController@resetPassword')->name('admin.asisten.resetPassword');
                 Route::put('/admin/asisten/update/{id}', 'AdminAsistenController@update')->name('admin.asisten.update');
                 Route::delete('/admin/asisten/delete/{id}', 'AdminAsistenController@delete')->name('admin.asisten.delete');
+
+                // REKAP ABSENSI
+                Route::get('/admin/rekap-absensi', 'AdminRekapAbsensiController@index')->name('admin.rekap-absensi.index');
+                Route::get('/admin/rekap-absensi/getRekap', 'AdminRekapAbsensiController@getRekap')->name('admin.rekap-absensi.getRekap');
+                
             });
     }
 );

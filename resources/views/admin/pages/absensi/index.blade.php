@@ -10,7 +10,7 @@
                     <div class="card-header ">
                         <div class="row mb-3">
                             <div class="col">
-                                <h4 class="card-title font-weight-normal">Absensi Laboratorium</h4>
+                                <h4 class="card-title font-weight-normal">Daftar Absensi Laboratorium</h4>
                             </div>
                         </div>
                     </div>
@@ -34,28 +34,39 @@
                                     <td>{{ $item->jadwal->shift }}</td>
                                     <td>{{ $item->created_at->isoFormat('D MMMM Y') }}</td>
                                     <td> 
-                                        @if ($absensi->where('user_id', Auth::user()->id)->where('bap_id', $item->id)->first())
+                                        @if ($item->status == 'aktif')
+                                            
+                                        
+                                            @if (!$absensi->where('user_id', Auth::user()->id)->where('bap_id', $item->id)->first())
+                                                <form method="POST" action="{{ route('admin.absensi.absen', $item->id ) }}" id="form-absen-{{ $item->id }}" class="d-inline">
+                                                    @csrf
+                                                    <button type="button" onclick="absen({{ $item->id }})" class="btn btn-success mr-2 ">Hadir</button>
+                                                </form>
+                                                @if ($item->jadwal->instruktur->first()->user_id == Auth::user()->id)
+                                                    {{-- <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#exampleModal">
+                                                        Izin
+                                                    </button> --}}
+                                                    <a href="#mymodal" data-remote="{{ route('admin.absensi.show', [Auth::user()->id, $item->id] ) }}" class="btn btn-warning" data-toggle="modal" data-target="#mymodal" data-title="Detail " >
+                                                        Izin
+                                                    </a>
+                                                @endif
+                                            @else
+                                                <button type="button" class="btn btn-secondary mr-2" disabled>Hadir</button>
+                                                @if ($item->jadwal->instruktur->first()->user_id == Auth::user()->id)
+                                                    <button type="button" class="btn btn-secondary " disabled>
+                                                        Izin
+                                                    </button>
+                                                @endif
+                                            @endif
+                                        @else
+
                                             <button type="button" class="btn btn-secondary mr-2" disabled>Hadir</button>
-                                            @if ($item->jadwal->instruktur->user_id == Auth::user()->id)
+                                            @if ($item->jadwal->instruktur->first()->user_id == Auth::user()->id)
                                                 <button type="button" class="btn btn-secondary " disabled>
                                                     Izin
                                                 </button>
                                             @endif
-                                        @else
-                                            <form method="POST" action="{{ route('admin.absensi.absen', [Auth::user()->id, $item->id] ) }}">
-                                                @csrf
-                                                <button type="submit" class="btn btn-success mr-2 ">Hadir</button>
-                                            </form>
-                                            @if ($item->jadwal->instruktur->user_id == Auth::user()->id)
-                                                {{-- <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#exampleModal">
-                                                    Izin
-                                                </button> --}}
-                                                <a href="#mymodal" data-remote="{{ route('admin.absensi.show', [Auth::user()->id, $item->id] ) }}" class="btn btn-warning" data-toggle="modal" data-target="#mymodal" data-title="Detail " >
-                                                    Izin
-                                                </a>
-                                            @endif
                                         @endif
-                                        
                                     </td>
                                     <td>
                                         @php
@@ -108,7 +119,7 @@
 
 @push('after-script')
 <script>
-    jQuery(document).ready(function($){
+    $(document).ready(function(){
         $('#mymodal').on('show.bs.modal', function(e) {
             var button = $(e.relatedTarget);
             var modal = $(this);
@@ -116,5 +127,20 @@
             modal.find('.modal-title').html(button.data("title"));
         }); 
     });
+    function absen(id){
+        Swal.fire({
+            title: 'Lakukan absensi pada pertemuan ini?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya saya hadir!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $('#form-absen-'+id).submit();
+            }
+            });
+        }
 </script>
 @endpush

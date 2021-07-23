@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="crudTable">
                             <thead>
                                 <th>Kelas</th>
                                 <th>Matkul</th>
@@ -42,24 +42,31 @@
                                     <td>{{ $item->instruktur->first()->user->nama }}</td>
                                     <td>
                                         @foreach ($item->asisten as $asisten)
+
                                         <div class="alert alert-secondary alert-dismissible fade show my-1 py-1" role="alert">
                                             {{$loop->iteration.". ". $asisten->user->nama  }}
-                                            <button type="button" class="close py-1">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
+                                            <form action="{{ route('admin.jadwal.deleteAsisten', $asisten->id) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="close py-1">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </form>
+                                        </div>
                                         @endforeach
+                                        
                                         <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#modalAsisten" onclick="asisten({{ $item->id }}, {{ $item->instruktur->first()->user->id }})">
                                             + Tambah Asisten
                                         </button>
+                                        
                                     </td>
                                     <td>
                                         {{-- <a href="{{ route('admin.jadwal.edit', $item->id) }}" class="btn btn-warning btn-sm mr-2">Ubah</a> --}}
                                         
-                                        <form action="{{ route('admin.jadwal.delete', $item->id) }}" method="post">
+                                        <form action="{{ route('admin.jadwal.delete', $item->id) }}" method="post" id="form-hapus-{{ $item->id }}">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                            <button type="button" onclick="hapus({{ $item->id }})" class="btn btn-danger btn-sm">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -146,16 +153,29 @@
         });
     }
 
-    // function ubah(jadwalId){
-        
-    //     $.ajax({
-    //         url: "route('admin.jadwal.edit', "+jadwalId+")",
-    //         method: "GET",
-    //         data:{},
-    //         success: function(result){
-    //             $('#shift').html(result);
-    //         }
-    //     });
-    // }
+    $(document).ready(function(){
+        $('#crudTable').DataTable({
+            "columnDefs": [ {
+                "targets": [5,6],
+                "orderable": false
+            } ]
+        });
+    });
+
+    function hapus(id){
+        Swal.fire({
+        title: 'Yakin menghapus jadwal ini?',
+        text: "Kamu tidak akan bisa mengembalikan datanya!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yakin, hapus jadwal ini!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            $('#form-hapus-'+id).submit();
+        }
+        });
+    }
 </script>
 @endpush

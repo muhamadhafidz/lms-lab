@@ -39,4 +39,9 @@ class Jadwal extends Model
     {
         return $this->hasMany('App\Asisten', 'jadwal_id');
     }
+
+    public function bap()
+    {
+        return $this->hasMany('App\Bap', 'jadwal_id');
+    }
 }
