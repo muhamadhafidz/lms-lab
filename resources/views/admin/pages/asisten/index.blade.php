@@ -39,11 +39,14 @@
                                     <td>{{ $item->no_telp }}</td>
                                     <td>
                                         {{-- <a href="{{ route('admin.kelas.edit', $item->id) }}" class="btn btn-warning btn-sm">Ubah</a> --}}
+                                        @if ($item->id != Auth::user()->id)
                                         <form action="{{ route('admin.asisten.delete', $item->id) }}" method="post" class="ml-1 d-inline" id="form-hapus-{{ $item->id }}">
                                             @csrf
                                             @method('delete')
                                             <button type="button" onclick="hapus({{ $item->id }})" class="btn btn-danger btn-sm">Hapus</button>
                                         </form>
+                                        @endif
+                                        
                                         <form action="{{ route('admin.asisten.resetPassword', $item->id) }}" method="post" class="ml-1 d-inline" id="form-reset-{{ $item->id }}">
                                             @csrf
                                             <button type="button" onclick="resetPass({{ $item->id }})" class="btn btn-warning btn-sm">Reset password</button>

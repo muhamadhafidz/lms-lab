@@ -34,7 +34,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-          <button type="button" onclick="submit()" class="btn btn-success d-block">Buat Jadwal</button>
+          <button type="button" onclick="submit()" class="btn btn-success d-block">Tambah Asisten</button>
         </div>
       </div>
     </div>

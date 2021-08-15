@@ -14,7 +14,7 @@ class AddRelationJadwalAndAsisten extends Migration
     public function up()
     {
         Schema::table('asisten', function (Blueprint $table) {
-            $table->foreign('jadwal_id')->references('id')->on('jadwal');
+            // $table->foreign('jadwal_id')->references('id')->on('jadwal');
         });
     }
 

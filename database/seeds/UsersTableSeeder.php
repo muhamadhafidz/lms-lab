@@ -14,11 +14,11 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'npm' => Str::random(8),
             'nama' => Str::random(10),
-            'dir_foto' => 'assets/img/users/hafidz1.jpg',
+            'dir_foto' => 'assets/admin/img/default-avatar.png',
             'email' => Str::random(8).'@gmail.com',
             'no_telp' => Str::random(8),
             'password' => Hash::make('password'),
-            'roles' => 'asisten',
+            'roles' => 'staf',
             'active' => 'y',
         ]);
     }

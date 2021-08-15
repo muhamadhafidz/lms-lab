@@ -17,7 +17,7 @@ class ChangeNameColumnInstrukturId extends Migration
             $table->foreignId('jadwal_id')
                     ->constrained('jadwal')
                     ->onDelete('cascade');
-            // $table->dropForeign(['instruktur_id']);
+            $table->dropForeign(['instruktur_id']);
             $table->dropColumn(['instruktur_id']);
             
         });

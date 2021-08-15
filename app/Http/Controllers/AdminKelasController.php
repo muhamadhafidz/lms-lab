@@ -36,7 +36,7 @@ class AdminKelasController extends Controller
         $item['jumlah_mhs'] = $item['jumlah_mhs'] == null ? 0 : $item['jumlah_mhs'];
 
         Kelas::create($item);
-        Alert::success('Jadwal berhasil ditambahkan', '');
+        Alert::success('Kelas berhasil ditambahkan', '');
         return redirect()->route('admin.kelas.index');
     }
 

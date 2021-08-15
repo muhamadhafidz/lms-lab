@@ -14,7 +14,8 @@ class DropDirFoto extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('dir_foto');
+            $table->dropForeign(['kelas_id']);
+            $table->dropColumn('kelas_id');
         });
     }
 
